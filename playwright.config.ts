@@ -1,17 +1,10 @@
-const { defineConfig, devices } = require('@playwright/test');
+import { defineConfig, devices } from '@playwright/test';
 
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
+// toLocaleString() → your local timezone
+// UTC
+const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
 
-/**
- * See https://playwright.dev/docs/test-configuration.
- */
-module.exports = defineConfig({
+export default defineConfig({
   testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -22,18 +15,40 @@ module.exports = defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter:[
+    ['list'],
+    // ['allure-playwright'],
+    ['html', 
+      // to keep reports in same  folder in each run
+      { outputFolder: `playwright-report/report-${timestamp}`, 
+      // to keep reports in different folder in each run
+      // { outputFolder: `playwright-report-${timestamp}`, 
+      open: 'never',  // working
+      preserveOutput: 'never',
+      // clean: true  # to delete previous report, not working
+      }
+    ]
+  ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
+    
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
+    trace: 'retain-on-failure',
+
+
+
     /* Base URL to use in actions like `await page.goto('')`. */
     // baseURL: 'http://localhost:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
+    // trace: 'on-first-retry',
 
     // storage state
     // storageState: "test_data/user.json",
   },
+  // this is only to store screenshot, video, trace for test failures
+  outputDir: 'test-results',
 
   /* Configure projects for major browsers */
   projects: [
