@@ -20,7 +20,8 @@ export default defineConfig({
     // ['allure-playwright'],
     ['html', 
       // to keep reports in same  folder in each run
-      { outputFolder: `playwright-report/report-${timestamp}`, 
+      {outputFolder: 'playwright-report',
+      // { outputFolder: `playwright-report/report-${timestamp}`, 
       // to keep reports in different folder in each run
       // { outputFolder: `playwright-report-${timestamp}`, 
       open: 'never',  // working
