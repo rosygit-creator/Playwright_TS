@@ -39,5 +39,21 @@ jobs:
         path: playwright-report/
         retention-days: 10
 
+    - name: Send Slack notification
+      if: ${{ !cancelled()  && github.ref == 'refs/heads/main' }}
+      env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      run: |
+        STATUS="✅ Passed"
+        if [ "${{ job.status }}" != "success" ]; then
+          STATUS="❌ Failed"
+        fi
+
+        curl -X POST -H 'Content-type: application/json' \
+        --data "{
+          \"text\": \"*Playwright PR Tests Completed*\nStatus: $STATUS\nRepo: ${{ github.repository }}\nBranch: ${{ github.head_ref }}\nRun: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}\"
+        }" \
+        $SLACK_WEBHOOK_URL
+
     
        
