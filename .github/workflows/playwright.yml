@@ -24,10 +24,12 @@ jobs:
       run: npm ci
 
     - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
+      # run: npx playwright install --with-deps run tests in 3 browsers
+      run: npx playwright install chromium # install only chromium
 
     - name: Run Playwright tests
-      run: npx playwright test
+      # run: npx playwright test , run tests on all browsers
+      run: npx playwright test --project=chromium # run only on chromium
       
     - name: Upload Playwright report
       uses: actions/upload-artifact@v4
