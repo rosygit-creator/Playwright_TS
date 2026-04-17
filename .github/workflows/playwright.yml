@@ -55,6 +55,8 @@ jobs:
         if [ "${{ job.status }}" != "success" ]; then
           STATUS="❌ Failed"
         fi
+        
+        REPORT_URL="https://rosygit-creator.github.io/Playwright_TS/"
 
         curl -X POST -H 'Content-type: application/json' \
         --data "{
