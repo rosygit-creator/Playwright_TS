@@ -24,7 +24,7 @@ jobs:
 
     - name: Run Playwright tests
       # run: npx playwright test , run tests on all browsers
-      run: npx playwright test --project=chromium --reporter=json   # run only on chromium
+      run: npx playwright test --project=chromium --reporter=json > test-results.json # run only on chromium
     
     - name: Generate test summary
       if: always()
