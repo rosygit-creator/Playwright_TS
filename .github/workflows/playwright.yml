@@ -51,7 +51,7 @@ jobs:
         echo "FILES:"
         ls -la
         echo "REPORT:"
-        ls -la playwright-report || echo "❌ playwright-report NOT found"
+        ls -la playwright-report/index.html || echo "❌ playwright-report NOT found"
 
     - name: Deploy Playwright report
       if: always()
