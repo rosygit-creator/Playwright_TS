@@ -72,10 +72,12 @@ jobs:
         fi
 
         REPORT_LINK="<https://rosygit-creator.github.io/Playwright_TS/|📊 View Playwright Report>"
+        RUN_LINK="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
 
         curl -X POST -H 'Content-type: application/json' \
         --data "{
-          \"text\": \"*Playwright PR Tests Completed*\nStatus: $STATUS\nRepo: ${{ github.repository }}\nBranch: ${{ github.head_ref }}\nRun: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}\"
+          \"text\": \"*Playwright PR Tests Completed*\nStatus: $STATUS\nRepo: ${{ github.repository }}\nBranch: ${{ github.head_ref }}\nRun: $RUN_LINK\nReport: $REPORT_LINK\"
         }" \
         $SLACK_WEBHOOK_URL
 
