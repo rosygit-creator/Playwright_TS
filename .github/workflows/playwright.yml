@@ -32,9 +32,9 @@ jobs:
       # run: npx playwright test , run tests on all browsers
       run: npx playwright test --project=chromium --reporter=html   # run only on chromium
     
-    - name: Ensure report is generated
-      if: always()
-      run: npx playwright show-report || true
+    # - name: Ensure report is generated
+    #   if: always()
+    #   run: npx playwright show-report || true
 
     - name: Upload Playwright report
       uses: actions/upload-artifact@v4
