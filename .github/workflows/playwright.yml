@@ -1,4 +1,4 @@
-name: Playwright Tests
+name: Playwright E2E Tests
 
 on:
   # run when code is pushed/merged to main or master , git push origin main
@@ -13,6 +13,7 @@ on:
     branches: [ main, master ]
 jobs:
   test:
+    name: Run Playwright Tests on PR
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
