@@ -73,10 +73,7 @@ jobs:
 
         curl -X POST -H 'Content-type: application/json' \
         --data "{
-        \"text\": \"*Playwright PR Tests Completed*\n\
-        Status: $STATUS\n\
-        $REPORT_LINK\n\
-        🔗 Run123: $RUN_LINK\"
+        \"text\": \"*Playwright Tests Completed*\nStatus: $STATUS\n$REPORT_LINK\n🔗 Run: $RUN_LINK\"
         }" \
         $SLACK_WEBHOOK_URL
 
