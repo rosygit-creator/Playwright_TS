@@ -38,6 +38,15 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 10
+    - name: Debug report folder
+      if: always()
+      run: |
+        echo "PWD:"
+        pwd
+        echo "FILES:"
+        ls -la
+        echo "REPORT:"
+        ls -la playwright-report || echo "❌ playwright-report NOT found"
 
     - name: Deploy Playwright report
       if: always()
