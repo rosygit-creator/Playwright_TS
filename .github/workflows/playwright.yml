@@ -1,4 +1,5 @@
 name: Playwright Tests
+
 on:
   # run when code is pushed/merged to main or master , git push origin main
   #direct commits to master
@@ -29,8 +30,12 @@ jobs:
 
     - name: Run Playwright tests
       # run: npx playwright test , run tests on all browsers
-      run: npx playwright test --project=chromium # run only on chromium
-      
+      run: npx playwright test --project=chromium --reporter=html   # run only on chromium
+    
+    - name: Ensure report is generated
+      if: always()
+      run: npx playwright show-report || true
+
     - name: Upload Playwright report
       uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
