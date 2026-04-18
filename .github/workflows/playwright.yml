@@ -31,7 +31,10 @@ jobs:
     - name: Run Playwright tests
       # run: npx playwright test , run tests on all browsers
       run: npx playwright test --project=chromium --reporter=html   # run only on chromium
-  
+    
+    # - name: Ensure report is generated
+    #   if: always()
+    #   run: npx playwright show-report || true
 
     - name: Upload Playwright report
       uses: actions/upload-artifact@v4
@@ -69,11 +72,10 @@ jobs:
         fi
 
         REPORT_LINK="<https://rosygit-creator.github.io/Playwright_TS/|📊 View Playwright Report>"
-        RUN_LINK="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
         curl -X POST -H 'Content-type: application/json' \
         --data "{
-        \"text\": \"*Playwright Tests Completed*\nStatus: $STATUS\n$REPORT_LINK\n🔗 Run: $RUN_LINK\"
+          \"text\": \"*Playwright PR Tests Completed*\nStatus: $STATUS\nRepo: ${{ github.repository }}\nBranch: ${{ github.head_ref }}\nRun: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}\"
         }" \
         $SLACK_WEBHOOK_URL
 
