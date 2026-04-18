@@ -32,17 +32,26 @@ jobs:
       # run: npx playwright test , run tests on all browsers
       run: npx playwright test --project=chromium --reporter=html   # run only on chromium
     
+    - name: Upload Playwright report (PR)
+      if: github.event_name == 'pull_request'
+      uses: actions/upload-artifact@v4
+      with:
+        name: playwright-report
+        path: playwright-report/
+
+
     # - name: Ensure report is generated
     #   if: always()
     #   run: npx playwright show-report || true
 
-    - name: Upload Playwright report
+    - name: Upload Playwright report # main branch 
       uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
         name: playwright-report
         path: playwright-report/
         retention-days: 10
+
     - name: Debug report folder
       if: always()
       run: |
@@ -53,15 +62,15 @@ jobs:
         echo "REPORT:"
         ls -la playwright-report/index.html || echo "❌ playwright-report NOT found"
 
-    - name: Deploy Playwright report
-      if: always()
+    - name: Deploy Playwright report # deploy report on gh-pages only for main branch
+      if: ${{ !cancelled()  && github.ref == 'refs/heads/main' }}
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./playwright-report
         publish_branch: gh-pages
 
-    - name: Send Slack notification # verified slack notification is only when branch is merged
+    - name: Send Slack notification # verified slack notification is only when branch is merged (not when report generated from PR runs)
       if: ${{ !cancelled()  && github.ref == 'refs/heads/main' }}
       env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
