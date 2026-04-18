@@ -61,7 +61,7 @@ jobs:
         publish_dir: ./playwright-report
         publish_branch: gh-pages
 
-    - name: Send Slack notification
+    - name: Send Slack notification # verified slack notification is only when branch is merged
       if: ${{ !cancelled()  && github.ref == 'refs/heads/main' }}
       env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
