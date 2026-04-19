@@ -26,35 +26,33 @@ jobs:
       # run: npx playwright test , run tests on all browsers
       run: npx playwright test --project=chromium --reporter=json > test-results.json # run only on chromium
     
-    - name: display suammry
-      run: echo $GITHUB_STEP_SUMMARY
     
-    # - name: Generate test summary
-    #   if: always()
-    #   run: |
-    #     node <<'EOF'
-    #     const fs = require('fs');
+    - name: Generate test summary
+      if: always()
+      run: |
+        node <<'EOF'
+        const fs = require('fs');
 
-    #     const report = JSON.parse(fs.readFileSync('test-results.json', 'utf8'));
+        const report = JSON.parse(fs.readFileSync('test-results.json', 'utf8'));
 
-    #     const stats = report.stats || report;
+        const stats = report.stats || report;
 
-    #     const passed = stats.expected || 0;
-    #     const failed = stats.unexpected || 0;
-    #     const skipped = stats.skipped || 0;
+        const passed = stats.expected || 0;
+        const failed = stats.unexpected || 0;
+        const skipped = stats.skipped || 0;
 
-    #     const summary = `
-    #     ## 📊 Playwright Test Summary
+        const summary = `
+        📊 Playwright Test Summary
 
-    #     ✅ Passed: ${passed}
-    #     ❌ Failed: ${failed}
-    #     ⏭ Skipped: ${skipped}
+        ✅ Passed: ${passed}
+        ❌ Failed: ${failed}
+        ⏭ Skipped: ${skipped}
 
-        #  📄 [View Full Report](https://rosygit-creator.github.io/Playwright_TS/)
-        #   `;
+         📄 [View Full Report](https://rosygit-creator.github.io/Playwright_TS/)
+          `;
 
-        # fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, summary);
-        # EOF
+        fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, summary);
+        EOF
 
     # - name: Upload Playwright report (PR)
     #   if: ${{ !cancelled() && github.event_name == 'pull_request' }}
@@ -73,10 +71,10 @@ jobs:
     #     echo "REPORT:"
     #     ls -la playwright-report/index.html || echo "❌ playwright-report NOT found"
   
-    # - name: Add summary
-    #   if: always()
-    #   run: |
-    #     echo "## 📊 Playwright Tests" >> $GITHUB_STEP_SUMMARY
-    #     echo "✔ Tests executed" >> $GITHUB_STEP_SUMMARY
-    #     echo "📄 Report: https://rosygit-creator.github.io/Playwright_TS/" >> $GITHUB_STEP_SUMMARY
+    - name: Add summary
+      if: always()
+      run: |
+        echo "## 📊 Playwright Tests" >> $GITHUB_STEP_SUMMARY
+        echo "✔ Tests executed" >> $GITHUB_STEP_SUMMARY
+        echo "📄 Report: https://rosygit-creator.github.io/Playwright_TS/" >> $GITHUB_STEP_SUMMARY
        
