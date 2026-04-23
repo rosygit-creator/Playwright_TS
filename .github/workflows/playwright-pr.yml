@@ -1,5 +1,5 @@
 name: Playwright E2E Tests - PR
-
+# summary appears : https://github.com/rosygit-creator/Playwright_TS/actions/runs/24636257668
 on:
   # run when a new PR is created
   pull_request:
