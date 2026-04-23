@@ -1,0 +1,80 @@
+name: Playwright E2E Tests - PR
+# summary appears : https://github.com/rosygit-creator/Playwright_TS/actions/runs/24636257668
+on:
+  # run when a new PR is created
+  pull_request:
+    branches: [ main ]
+jobs:
+  test:
+    name: Run Playwright Tests on PR
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: lts/*
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Install Playwright Browsers
+      # run: npx playwright install --with-deps run tests in 3 browsers
+      run: npx playwright install chromium # install only chromium
+
+    - name: Run Playwright tests
+      # run: npx playwright test , run tests on all browsers
+      run: npx playwright test --project=chromium --reporter=json > test-results.json # run only on chromium
+    
+    
+    - name: Generate test summary
+      if: always()
+      run: |
+        node <<'EOF'
+        const fs = require('fs');
+
+        const report = JSON.parse(fs.readFileSync('test-results.json', 'utf8'));
+
+        const stats = report.stats || report;
+
+        const passed = stats.expected || 0;
+        const failed = stats.unexpected || 0;
+        const skipped = stats.skipped || 0;
+
+        const summary = `
+        📊 Playwright Test Summary
+
+        ✅ Passed: ${passed}
+        ❌ Failed: ${failed}
+        ⏭ Skipped: ${skipped}
+
+         📄 [View Full Report](https://rosygit-creator.github.io/Playwright_TS/)
+          `;
+
+        fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, summary);
+        EOF
+
+    # - name: Upload Playwright report (PR)
+    #   if: ${{ !cancelled() && github.event_name == 'pull_request' }}
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: playwright-report-${{ github.run_id }}
+    #     path: playwright-report/
+
+    # - name: Debug report folder
+    #   if: always()
+    #   run: |
+    #     echo "PWD:"
+    #     pwd
+    #     echo "FILES:"
+    #     ls -la
+    #     echo "REPORT:"
+    #     ls -la playwright-report/index.html || echo "❌ playwright-report NOT found"
+  
+    - name: Add summary
+      if: always()
+      run: |
+        echo "## 📊 Playwright Tests" >> $GITHUB_STEP_SUMMARY
+        echo "✔ Tests executed" >> $GITHUB_STEP_SUMMARY
+        echo "📄 Report: https://rosygit-creator.github.io/Playwright_TS/" >> $GITHUB_STEP_SUMMARY
+       
