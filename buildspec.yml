@@ -1,0 +1,76 @@
+version: 0.2
+
+env:
+  variables:
+    CI: "true"
+    REPORT_DIR: "playwright-report-nightly"
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - echo "Installing dependencies..."
+      - npm ci
+
+      # Install Playwright browsers + system deps
+      - echo "Installing Playwright browsers..."
+      - npx playwright install chromium # install only chromium
+      # install jq to parse json file
+      - npm install jq -g
+
+
+  pre_build:
+    commands:
+      - echo "Running pre-build steps..."
+      - npx playwright --version
+
+  build:
+    commands:
+      - echo "Running Playwright tests..."
+      - npx playwright test --project=chromium --workers=2 --reporter=json > results.json
+      - npx playwright test --project=chromium --workers=2 --reporter=html || true
+
+  post_build:
+    commands:
+      - echo "Tests completed on $(date)"
+      - echo "Extracting test results..."
+
+      # Extract stats safely
+      - PASSED=$(cat results.json | jq '.stats.expected // 0')
+      - FAILED=$(cat results.json | jq '.stats.unexpected // 0')
+      - SKIPPED=$(cat results.json | jq '.stats.skipped // 0')
+
+    # Upload HTML report to S3 (recommended)
+      - aws s3 cp playwright-report-nightly s3://playwright-reports-ra1/playwright-reports/$CODEBUILD_BUILD_ID/ --recursive
+
+      # Build report URL
+      - REPORT_URL="https://playwright-reports-ra1.s3.amazonaws.com/playwright-reports/$CODEBUILD_BUILD_ID/index.html"
+
+  # Determine status
+      - |
+        if [ "$FAILED" -gt 0 ]; then
+          STATUS="❌ FAILED"
+        else
+          STATUS="✅ PASSED"
+        fi
+
+      # Send Slack message
+      - |
+        curl -X POST -H 'Content-type: application/json' \
+        --data "{
+          \"text\": \"🧪 *Playwright Nightly Results from AWS Codebuild*\n\n$STATUS\n\n✅ Passed: $PASSED\n❌ Failed: $FAILED\n⏭ Skipped: $SKIPPED\n\n📊 Report: $REPORT_URL\n🔗 Build: $CODEBUILD_BUILD_ID\"
+        }" \
+        $SLACK_WEBHOOK_URL
+
+artifacts:
+  files:
+    - $REPORT_DIR/**/*
+    - test-results/**/*
+  discard-paths: no
+
+# reports:
+#   playwright-report:
+#     files:
+#       - '**/*'
+#     base-directory: playwright-report
