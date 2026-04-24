@@ -1,5 +1,15 @@
 name: Playwright E2E Tests - PR
-# summary appears : https://github.com/rosygit-creator/Playwright_TS/actions/runs/24636257668
+# summary appears (no report is uploaded) : https://github.com/rosygit-creator/Playwright_TS/actions/runs/24636257668
+# In this PR .yml file , we  have:
+  # test-results.json
+  # GitHub Step Summary (your custom text)
+
+# we do NOT generate:
+  # playwright-report/ folder
+  # index.html
+  # Playwright HTML report
+  # report generation is cancelled due to : --reporter=json
+
 on:
   # run when a new PR is created
   pull_request:
@@ -9,6 +19,9 @@ jobs:
     name: Run Playwright Tests on PR
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    # env:
+    #   REPORT_DIR: playwright-report-gha
+
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
