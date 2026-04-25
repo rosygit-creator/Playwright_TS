@@ -17,7 +17,7 @@ phases:
       - echo "Installing Playwright browsers..."
       - npx playwright install chromium # install only chromium
       # install jq to parse json file
-      - npm install jq -g
+      # - npm install jq -g
 
 
   pre_build:
@@ -28,7 +28,7 @@ phases:
   build:
     commands:
       - echo "Running Playwright tests..."
-      - npx playwright test --project=chromium --workers=2 --reporter=json > results.json
+      - npx playwright test --project=chromium --workers=2 --reporter=json > playwright-results.json || true
       - npx playwright test --project=chromium --workers=2 --reporter=html || true
 
   post_build:
@@ -37,9 +37,18 @@ phases:
       - echo "Extracting test results..."
 
       # Extract stats safely
-      - PASSED=$(cat results.json | jq '.stats.expected // 0')
-      - FAILED=$(cat results.json | jq '.stats.unexpected // 0')
-      - SKIPPED=$(cat results.json | jq '.stats.skipped // 0')
+      - |
+        eval $(node <<'EOF'
+        const fs = require('fs');
+
+        const report = JSON.parse(fs.readFileSync('playwright-results.json', 'utf8'));
+        const stats = report.stats ?? {};
+
+        console.log(`PASSED=${stats.expected ?? 0}`);
+        console.log(`FAILED=${stats.unexpected ?? 0}`);
+        console.log(`SKIPPED=${stats.skipped ?? 0}`);
+        EOF
+        )
 
     # Upload HTML report to S3 (recommended)
       - aws s3 cp playwright-report-nightly s3://playwright-reports-ra1/playwright-reports/$CODEBUILD_BUILD_ID/ --recursive

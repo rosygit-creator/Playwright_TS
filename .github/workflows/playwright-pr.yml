@@ -37,7 +37,7 @@ jobs:
 
     - name: Run Playwright tests
       # run: npx playwright test , run tests on all browsers
-      run: npx playwright test --project=chromium --reporter=json > test-results.json # run only on chromium
+      run: npx playwright test --project=chromium --reporter=json > playwright-results.json # run only on chromium
     
     
     - name: Generate test summary
@@ -46,7 +46,7 @@ jobs:
         node <<'EOF'
         const fs = require('fs');
 
-        const report = JSON.parse(fs.readFileSync('test-results.json', 'utf8'));
+        const report = JSON.parse(fs.readFileSync('playwright-results.json', 'utf8'));
 
         const stats = report.stats || report;
 
