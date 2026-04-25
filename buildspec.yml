@@ -4,9 +4,7 @@ env:
   variables:
     CI: "true"
     REPORT_DIR: "playwright-report-nightly"
-    
-
-
+  
 phases:
   install:
     runtime-versions:
