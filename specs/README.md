@@ -23,3 +23,10 @@ Service role: codebuild-pw-nightly-tests-service-role-ra1
 in AWS, Artifcats-- name should be same as $REPORT_DIR in buildspec.yml (here: playwright-report-nightly)
 s3 bucket name: playwright-reports-ra1 -->
 
+# setup slack codebuild integration
+1. create a webhook in slacl, add new slack channel
+2. add webhook url to aws secets manager
+3. Create a policy and add it to service role
+4. add env variable in codebuild project
+5. update buildspec.yml
+6. commit oce and run the build from AWS
