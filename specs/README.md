@@ -30,3 +30,11 @@ s3 bucket name: playwright-reports-ra1 -->
 4. add env variable in codebuild project
 5. update buildspec.yml
 6. commit oce and run the build from AWS
+
+
+# Services used:
+1. Codebuild
+2. IAM
+3. Secrets manager
+4. S3
+5. Cloudwatch
