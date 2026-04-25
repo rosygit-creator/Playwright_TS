@@ -28,8 +28,10 @@ phases:
   build:
     commands:
       - echo "Running Playwright tests..."
-      - npx playwright test --project=chromium --workers=2 --reporter=json > playwright-results.json || true
-      - npx playwright test --project=chromium --workers=2 --reporter=html || true
+      - npx playwright test --project=chromium --workers=2
+      
+      # - npx playwright test --project=chromium --workers=2 --reporter=json --outputFile=playwright-results.json || true
+      # - npx playwright test --project=chromium --workers=2 --reporter=html || true
 
   post_build:
     commands:
