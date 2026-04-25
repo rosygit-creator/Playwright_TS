@@ -37,6 +37,8 @@ phases:
     commands:
       - echo "Tests completed on $(date)"
       - echo "Extracting test results..."
+      - echo "slack codebuild url: $SLACK_WEBHOOK_URL_CODEBUILD"
+
 
       # Extract stats safely
       - |
