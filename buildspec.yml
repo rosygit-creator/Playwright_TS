@@ -40,20 +40,21 @@ phases:
       - echo "SLACK_WEBHOOK_URL_CODEBUILD=$SLACK_WEBHOOK_URL_CODEBUILD"
 
       - |
-        eval $(node <<'EOF'
+        node <<'EOF'
         const fs = require('fs');
 
         const report = JSON.parse(fs.readFileSync('playwright-results.json', 'utf8'));
         const stats = report.stats ?? {};
 
-        console.log(JSON.stringify({
+        const result = {
           PASSED: stats.expected ?? 0,
           FAILED: stats.unexpected ?? 0,
           SKIPPED: stats.skipped ?? 0
-        }));
-        
+        };
+
+        console.log(JSON.stringify(result));
         EOF
-        )
+
 
       - aws s3 cp playwright-report-nightly s3://playwright-reports-ra1/playwright-reports/$CODEBUILD_BUILD_ID/ --recursive
 
