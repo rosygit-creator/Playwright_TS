@@ -46,9 +46,12 @@ phases:
         const report = JSON.parse(fs.readFileSync('playwright-results.json', 'utf8'));
         const stats = report.stats ?? {};
 
-        console.log(`PASSED=${stats.expected ?? 0}`);
-        console.log(`FAILED=${stats.unexpected ?? 0}`);
-        console.log(`SKIPPED=${stats.skipped ?? 0}`);
+        console.log(JSON.stringify({
+          PASSED: stats.expected ?? 0,
+          FAILED: stats.unexpected ?? 0,
+          SKIPPED: stats.skipped ?? 0
+        }));
+        
         EOF
         )
 
