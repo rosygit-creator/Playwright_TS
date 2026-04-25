@@ -4,7 +4,7 @@ env:
   variables:
     CI: "true"
     REPORT_DIR: "playwright-report-nightly"
-    SLACK_WEBHOOK_URL:"https://hooks.slack.com/services/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"
+    
 
 
 phases:
@@ -74,7 +74,7 @@ phases:
         --data "{
           \"text\": \"🧪 *Playwright Nightly Results from AWS Codebuild*\n\n$STATUS\n\n✅ Passed: $PASSED\n❌ Failed: $FAILED\n⏭ Skipped: $SKIPPED\n\n📊 Report: $REPORT_URL\n🔗 Build: $CODEBUILD_BUILD_ID\"
         }" \
-        $SLACK_WEBHOOK_URL
+        $SLACK_WEBHOOK_URL_CODEBUILD
 
 artifacts:
   files:
