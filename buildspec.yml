@@ -84,7 +84,7 @@ phases:
       - |
         PAYLOAD=$(cat <<EOF
         {
-        "text": "🧪 Playwright Nightly Results\n\n$STATUS\n\nPassed: $PASSED\nFailed: $FAILED\nSkipped: $SKIPPED\n\nReport: $REPORT_URL"
+        "text": "🧪 Playwright Nightly Results\n\n$STATUS\n\nPassed: $PASSED\nFailed: $FAILED\nSkipped: $SKIPPED\n\nReport: <${REPORT_URL}|View Nightly runs report>"
         }
         EOF
         )
