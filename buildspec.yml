@@ -17,7 +17,7 @@ phases:
       - echo "Installing Playwright browsers..."
       - npx playwright install chromium # install only chromium
       # install jq to parse json file
-      # - npm install jq -g
+      - yum install -y jq
 
 
   pre_build:
@@ -40,20 +40,29 @@ phases:
       - echo "SLACK_WEBHOOK_URL_CODEBUILD=$SLACK_WEBHOOK_URL_CODEBUILD"
 
       - |
-        node <<'EOF'
+        RESULT=$(node <<'EOF'
         const fs = require('fs');
 
         const report = JSON.parse(fs.readFileSync('playwright-results.json', 'utf8'));
         const stats = report.stats ?? {};
 
         const result = {
-          PASSED: stats.expected ?? 0,
-          FAILED: stats.unexpected ?? 0,
-          SKIPPED: stats.skipped ?? 0
+        PASSED: stats.expected ?? 0,
+        FAILED: stats.unexpected ?? 0,
+        SKIPPED: stats.skipped ?? 0
         };
 
         console.log(JSON.stringify(result));
         EOF
+        )
+
+        echo "RESULT=$RESULT"
+
+        PASSED=$(echo "$RESULT" | jq -r .PASSED)
+        FAILED=$(echo "$RESULT" | jq -r .FAILED)
+        SKIPPED=$(echo "$RESULT" | jq -r .SKIPPED)
+
+        echo "PASSED=$PASSED FAILED=$FAILED SKIPPED=$SKIPPED"
 
 
       - aws s3 cp playwright-report-nightly s3://playwright-reports-ra1/playwright-reports/$CODEBUILD_BUILD_ID/ --recursive
@@ -61,18 +70,30 @@ phases:
       - REPORT_URL="https://playwright-reports-ra1.s3.amazonaws.com/playwright-reports/$CODEBUILD_BUILD_ID/index.html"
 
       - |
+        FAILED=${FAILED:-0}
+
         if [ "$FAILED" -gt 0 ]; then
-          STATUS="❌ FAILED"
+        STATUS="❌ FAILED"
         else
-          STATUS="✅ PASSED"
+        STATUS="✅ PASSED"
         fi
 
+        echo "STATUS=$STATUS"
+
       - |
-        curl -X POST -H "Content-type: application/json" \
-        --data "{
-          \"text\": \"🧪 Playwright Nightly Results\n\n$STATUS\n\nPassed: $PASSED\nFailed: $FAILED\nSkipped: $SKIPPED\n\nReport: $REPORT_URL\"
-        }" \
-        "$SLACK_WEBHOOK_URL_CODEBUILD"
+        PAYLOAD=$(cat <<EOF
+        {
+        "text": "🧪 Playwright Nightly Results\n\n$STATUS\n\nPassed: $PASSED\nFailed: $FAILED\nSkipped: $SKIPPED\n\nReport: $REPORT_URL"
+        }
+        EOF
+        )
+
+        echo "Sending to Slack..."
+
+        curl -v -X POST \
+          -H "Content-type: application/json" \
+          --data "$PAYLOAD" \
+          "$SLACK_WEBHOOK_URL_CODEBUILD"
 
 artifacts:
   files:
