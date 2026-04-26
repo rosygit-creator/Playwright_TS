@@ -38,3 +38,9 @@ s3 bucket name: playwright-reports-ra1 -->
 3. Secrets manager
 4. S3
 5. Cloudwatch
+
+
+
+https://hooks.slack.com/services/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
+
+https://hooks.slack.com/services/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
