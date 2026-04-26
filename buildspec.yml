@@ -37,6 +37,7 @@ phases:
     commands:
       - echo "Tests completed on $(date)"
       - echo "Extracting test results..."
+      - echo "Webhook present? ${SLACK_WEBHOOK_URL_CODEBUILD:+YES}"
       - echo "SLACK_WEBHOOK_URL_CODEBUILD=$SLACK_WEBHOOK_URL_CODEBUILD"
 
       - |
