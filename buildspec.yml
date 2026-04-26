@@ -12,18 +12,18 @@ phases:
     commands:
       - echo "Installing dependencies..."
       - npm ci
+      - apt-get update && apt-get install -y jq
 
       # Install Playwright browsers + system deps
       - echo "Installing Playwright browsers..."
       - npx playwright install chromium # install only chromium
-      # install jq to parse json file
-      - yum install -y jq
 
 
   pre_build:
     commands:
       - echo "Running pre-build steps..."
       - npx playwright --version
+      - jq --version
 
   build:
     commands:
