@@ -45,20 +45,24 @@ s3 bucket name: playwright-reports-ra1 -->
 5. IAM: to create service role and policy
 6. Cloudwatch: View logs 
 7. Access denied error in Github:
+
 Solution:
 1. Setup policy in service role for Codebuild--GitHub integration
 
 8. Did not see Pass/Fail tests count in cloudwatch logs
+
 Solution:
 1. added debugging
 2. installed jq
 
 9. Did not receive report link and pass/fail status in slack
+
 Solution:
 1. Added the Env variable in codebuild project in the right way
 2. Webhook was missing in slack, created it
 
 10. Cannot view report vis slack link:
+
 Solution: 
 1. Public access for S3 bucket was locked, unlocked it
 2. Added Access Control list (ACL) in S3--Permissions tab to allow public access to files(obkjects)
