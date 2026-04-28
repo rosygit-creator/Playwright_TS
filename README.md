@@ -49,17 +49,20 @@ s3 bucket name: playwright-reports-ra1 -->
 Solution:
 1. Setup policy in service role for Codebuild--GitHub integration
 
+
 8. Did not see Pass/Fail tests count in cloudwatch logs
 
 Solution:
 1. added debugging
 2. installed jq
 
+
 9. Did not receive report link and pass/fail status in slack
 
 Solution:
 1. Added the Env variable in codebuild project in the right way
 2. Webhook was missing in slack, created it
+
 
 10. Cannot view report vis slack link:
 
