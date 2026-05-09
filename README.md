@@ -71,7 +71,9 @@ Solution:
 2. Added Access Control list (ACL) in S3--Permissions tab to allow public access to files(obkjects)
 
 
-
+Playwright run notification and report link in slack from AWS Codebuild
 <img width="568" height="210" alt="Screen Shot 2026-05-08 at 6 01 03 PM" src="https://github.com/user-attachments/assets/f10fa660-8d9e-4d6e-ba14-d17c26ebeae2" />
+
+Playwright run notification and report link in slack from code merges to amin branch in Git
 <img width="669" height="157" alt="Screen Shot 2026-05-08 at 6 00 53 PM" src="https://github.com/user-attachments/assets/c561ab7e-57b0-466b-9292-f4ec2cac6104" />
 
