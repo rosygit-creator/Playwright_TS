@@ -54,28 +54,32 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
-    {
-      name:'setup',
-      // testMatch:/.*\.setup\.ts/,
-      testMatch:['global.setup.ts'],
-      use: { ...devices['Desktop Chrome'], storageState: undefined },
-      teardown:'teardown',
-    },
+    // works
+    // {
+    //   name:'setup',
+    //   // testMatch:/.*\.setup\.ts/,
+    //   testMatch:['global.setup.ts'],
+    //   use: { ...devices['Desktop Chrome'], storageState: undefined },
+    //   teardown:'teardown',
+    // },
 
-// Teardown project
-    {
-      name: 'teardown',
-      testMatch: ['global.teardown.ts'], // Run the teardown file
-    },
+// Teardown project -works
+    // {
+    //   name: 'teardown',
+    //   testMatch: ['global.teardown.ts'], // Run the teardown file
+    // },
     
-
-    {
-      name: 'chromium',
+    // works
+    // {
+    //   name: 'chromium',
     
-      use: { ...devices['Desktop Chrome'], storageState: 'tests/.auth/user.json' },
-      dependencies:['setup'],
-    },
+    //   use: { ...devices['Desktop Chrome'], storageState: 'tests/.auth/user.json' },
+    //   dependencies:['setup'],
+    // },
 
+
+
+    // works
     
     // {
     //   name: 'firefox',

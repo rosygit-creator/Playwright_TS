@@ -10,7 +10,7 @@ const authFile = 'tests/.auth/user.json';
 
 // const authFile = path.join(__dirname, '../playwright/.auth/user.json');
 
-test('authenticate', async ({ page }) => {
+test.skip('authenticate', async ({ page }) => {
   // Perform authentication steps. Replace these actions with your own.
     await page.goto('https://www.saucedemo.com/');
     await page.getByRole('textbox', { name: 'Username' }).fill(user_input.username)

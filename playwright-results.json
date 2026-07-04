@@ -1,0 +1,227 @@
+{
+  "config": {
+    "configFile": "/Users/rosyagarwal/gitWork/Playwright_TS/playwright.config.ts",
+    "rootDir": "/Users/rosyagarwal/gitWork/Playwright_TS/tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/rosyagarwal/gitWork/Playwright_TS/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "setup",
+        "name": "setup",
+        "testDir": "/Users/rosyagarwal/gitWork/Playwright_TS/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "global.setup.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/rosyagarwal/gitWork/Playwright_TS/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "teardown",
+        "name": "teardown",
+        "testDir": "/Users/rosyagarwal/gitWork/Playwright_TS/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "global.teardown.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/rosyagarwal/gitWork/Playwright_TS/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/rosyagarwal/gitWork/Playwright_TS/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "playwright-results.json"
+        }
+      ],
+      [
+        "html",
+        {
+          "outputFolder": "playwright-report",
+          "open": "never",
+          "preserveOutput": "never"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "3way",
+    "version": "1.59.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "global.setup.ts",
+      "file": "global.setup.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "authenticate",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "location": {
+                    "file": "/Users/rosyagarwal/gitWork/Playwright_TS/tests/global.setup.ts",
+                    "line": 13,
+                    "column": 6
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "setup",
+              "projectName": "setup",
+              "results": [
+                {
+                  "workerIndex": -1,
+                  "parallelIndex": -1,
+                  "status": "skipped",
+                  "duration": 0,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-05-19T17:33:10.785Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "location": {
+                        "file": "/Users/rosyagarwal/gitWork/Playwright_TS/tests/global.setup.ts",
+                        "line": 13,
+                        "column": 6
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "e4eb4d1272d956fb120f-8c4d7d1f7915be960f17",
+          "file": "global.setup.ts",
+          "line": 13,
+          "column": 6
+        }
+      ]
+    },
+    {
+      "title": "new_tests/juvare.spec.ts",
+      "file": "new_tests/juvare.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "dropdown",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 9,
+                  "error": {
+                    "message": "Error: browser._wrapApiCall: Error reading storage state from tests/.auth/user.json:\nENOENT: no such file or directory, open 'tests/.auth/user.json'",
+                    "stack": "Error: browser._wrapApiCall: Error reading storage state from tests/.auth/user.json:\nENOENT: no such file or directory, open 'tests/.auth/user.json'"
+                  },
+                  "errors": [
+                    {
+                      "message": "Error: browser._wrapApiCall: Error reading storage state from tests/.auth/user.json:\nENOENT: no such file or directory, open 'tests/.auth/user.json'"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-05-19T17:33:11.599Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/rosyagarwal/gitWork/Playwright_TS/test-results/new_tests-juvare-dropdown-chromium/error-context.md"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "d3de4af474307b69ad04-ba1cddc7d49c1e9f79ba",
+          "file": "new_tests/juvare.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-05-19T17:33:09.953Z",
+    "duration": 2403.990000002086,
+    "expected": 0,
+    "skipped": 1,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

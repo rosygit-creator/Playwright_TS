@@ -11,3 +11,4 @@ test('skip authenticate', async ({ page }) => {
     await page.getByRole('button', { name: 'Open Menu' }).click();
     await page.getByRole('link', { name: 'All Items' }).click();
 });
+
