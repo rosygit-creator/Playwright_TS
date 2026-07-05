@@ -5,8 +5,10 @@ on:
   #direct commits to master
   #merging a feature branch into main
   
-  push:
-    branches: [ main, master ]
+  # commenting out to enable manual triggers 
+  # push:
+  #   branches: [ main, master ]
+
   # run when a PR is merged to main
   # run when a new PR is created
   # pull_request:
