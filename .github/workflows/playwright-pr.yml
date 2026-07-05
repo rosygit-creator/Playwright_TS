@@ -11,9 +11,11 @@ name: Playwright E2E Tests - PR
   # report generation is cancelled due to : --reporter=json
 
 on:
+  # commenting out to enable manual triggers 
   # run when a new PR is created
-  pull_request:
-    branches: [ main ]
+  # pull_request:
+  #   branches: [ main ]
+
 jobs:
   test:
     name: Run Playwright Tests on PR

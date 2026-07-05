@@ -1,4 +1,29 @@
 import { defineConfig, devices } from '@playwright/test';
+import dotenv from 'dotenv';
+import path from 'path';
+
+
+// there are 3 steps to load env variables in this config file
+// 1. get the env
+// 2. set the environment file  path
+// set the env variables in process.env and return the config value 
+
+// get config value 
+
+const getconfig = ()=>{
+// ENVIRONMENT will set the value of env as qa/dev/staging e.g
+// ENVIRONMENT=qa npx playwright test
+
+// if ENVIRONMENT is not set, default value will be staging (fallback to default)
+const selected_env=process.env.ENVIRONMENT || 'staging';
+const envFilePath = path.resolve(__dirname, 'config', `.env.${selected_env}`);
+dotenv.config({ path: envFilePath });
+
+return selected_env;
+}
+
+// this has qa/dev/staging value
+ getconfig();
 
 // toLocaleString() → your local timezone
 // UTC
@@ -54,14 +79,13 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
-    // works
-    // {
-    //   name:'setup',
-    //   // testMatch:/.*\.setup\.ts/,
-    //   testMatch:['global.setup.ts'],
-    //   use: { ...devices['Desktop Chrome'], storageState: undefined },
-    //   teardown:'teardown',
-    // },
+    {
+      name:'setup',
+      // testMatch:/.*\.setup\.ts/,
+      testMatch:/.*\.setup\.ts/,
+      use: { ...devices['Desktop Chrome'], storageState: undefined },
+      // teardown:'teardown',
+    },
 
 // Teardown project -works
     // {
@@ -69,47 +93,15 @@ export default defineConfig({
     //   testMatch: ['global.teardown.ts'], // Run the teardown file
     // },
     
-    // works
-    // {
-    //   name: 'chromium',
     
-    //   use: { ...devices['Desktop Chrome'], storageState: 'tests/.auth/user.json' },
-    //   dependencies:['setup'],
-    // },
-
-
-
-    // works
+    {
+      name: 'chromium',
     
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
+      use: { ...devices['Desktop Chrome'], 
+      storageState: 'tests/.auth/user.json' },
+      dependencies:['setup'],
+    },
 
-    // {
-    //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
-    // },
-
-    /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: { ...devices['iPhone 12'] },
-    // },
-
-    /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-    // },
   ],
 
   /* Run your local dev server before starting the tests */

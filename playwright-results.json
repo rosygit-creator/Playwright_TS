@@ -11,7 +11,7 @@
     "grepInvert": null,
     "maxFailures": 0,
     "metadata": {
-      "actualWorkers": 1
+      "actualWorkers": 4
     },
     "preserveOutput": "always",
     "projects": [
@@ -20,14 +20,14 @@
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 1
+          "actualWorkers": 4
         },
         "id": "setup",
         "name": "setup",
         "testDir": "/Users/rosyagarwal/gitWork/Playwright_TS/tests",
         "testIgnore": [],
         "testMatch": [
-          "global.setup.ts"
+          "/.*\\.setup\\.ts/"
         ],
         "timeout": 30000
       },
@@ -36,23 +36,7 @@
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 1
-        },
-        "id": "teardown",
-        "name": "teardown",
-        "testDir": "/Users/rosyagarwal/gitWork/Playwright_TS/tests",
-        "testIgnore": [],
-        "testMatch": [
-          "global.teardown.ts"
-        ],
-        "timeout": 30000
-      },
-      {
-        "outputDir": "/Users/rosyagarwal/gitWork/Playwright_TS/test-results",
-        "repeatEach": 1,
-        "retries": 0,
-        "metadata": {
-          "actualWorkers": 1
+          "actualWorkers": 4
         },
         "id": "chromium",
         "name": "chromium",
@@ -92,81 +76,70 @@
     "shard": null,
     "tags": [],
     "updateSnapshots": "missing",
-    "updateSourceMethod": "3way",
+    "updateSourceMethod": "patch",
     "version": "1.59.1",
-    "workers": 1,
+    "workers": 4,
     "webServer": null
   },
   "suites": [
     {
-      "title": "global.setup.ts",
-      "file": "global.setup.ts",
+      "title": "auth.setup.ts",
+      "file": "auth.setup.ts",
       "column": 0,
       "line": 0,
       "specs": [
         {
-          "title": "authenticate",
+          "title": "authenticate using environment variables",
           "ok": true,
           "tags": [],
           "tests": [
             {
               "timeout": 30000,
-              "annotations": [
-                {
-                  "type": "skip",
-                  "location": {
-                    "file": "/Users/rosyagarwal/gitWork/Playwright_TS/tests/global.setup.ts",
-                    "line": 13,
-                    "column": 6
-                  }
-                }
-              ],
-              "expectedStatus": "skipped",
+              "annotations": [],
+              "expectedStatus": "passed",
               "projectId": "setup",
               "projectName": "setup",
               "results": [
                 {
-                  "workerIndex": -1,
-                  "parallelIndex": -1,
-                  "status": "skipped",
-                  "duration": 0,
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1449,
                   "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-05-19T17:33:10.785Z",
-                  "annotations": [
+                  "stdout": [
                     {
-                      "type": "skip",
-                      "location": {
-                        "file": "/Users/rosyagarwal/gitWork/Playwright_TS/tests/global.setup.ts",
-                        "line": 13,
-                        "column": 6
-                      }
+                      "text": "Selected Environment: qa\n"
+                    },
+                    {
+                      "text": "URL: https://www.saucedemo.com/\n"
                     }
                   ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-05T17:01:35.478Z",
+                  "annotations": [],
                   "attachments": []
                 }
               ],
-              "status": "skipped"
+              "status": "expected"
             }
           ],
-          "id": "e4eb4d1272d956fb120f-8c4d7d1f7915be960f17",
-          "file": "global.setup.ts",
-          "line": 13,
+          "id": "17e3fe6f4d9d8bd79c6b-aac0b6d1eefd79dcee12",
+          "file": "auth.setup.ts",
+          "line": 12,
           "column": 6
         }
       ]
     },
     {
-      "title": "new_tests/juvare.spec.ts",
-      "file": "new_tests/juvare.spec.ts",
+      "title": "a_skip-login.spec.ts",
+      "file": "a_skip-login.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [
         {
-          "title": "dropdown",
-          "ok": false,
+          "title": "skip authenticate",
+          "ok": true,
           "tags": [],
           "tests": [
             {
@@ -179,49 +152,438 @@
                 {
                   "workerIndex": 1,
                   "parallelIndex": 0,
-                  "status": "failed",
-                  "duration": 9,
-                  "error": {
-                    "message": "Error: browser._wrapApiCall: Error reading storage state from tests/.auth/user.json:\nENOENT: no such file or directory, open 'tests/.auth/user.json'",
-                    "stack": "Error: browser._wrapApiCall: Error reading storage state from tests/.auth/user.json:\nENOENT: no such file or directory, open 'tests/.auth/user.json'"
-                  },
-                  "errors": [
-                    {
-                      "message": "Error: browser._wrapApiCall: Error reading storage state from tests/.auth/user.json:\nENOENT: no such file or directory, open 'tests/.auth/user.json'"
-                    }
-                  ],
+                  "status": "passed",
+                  "duration": 3129,
+                  "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-05-19T17:33:11.599Z",
+                  "startTime": "2026-07-05T17:01:38.275Z",
                   "annotations": [],
-                  "attachments": [
-                    {
-                      "name": "error-context",
-                      "contentType": "text/markdown",
-                      "path": "/Users/rosyagarwal/gitWork/Playwright_TS/test-results/new_tests-juvare-dropdown-chromium/error-context.md"
-                    }
-                  ]
+                  "attachments": []
                 }
               ],
-              "status": "unexpected"
+              "status": "expected"
             }
           ],
-          "id": "d3de4af474307b69ad04-ba1cddc7d49c1e9f79ba",
-          "file": "new_tests/juvare.spec.ts",
-          "line": 5,
+          "id": "42220ade7b18990d78e1-8292f3aef55aff0194e3",
+          "file": "a_skip-login.spec.ts",
+          "line": 8,
           "column": 5
+        }
+      ]
+    },
+    {
+      "title": "api_tests/delete_request.spec.js",
+      "file": "api_tests/delete_request.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "API Tests",
+          "file": "api_tests/delete_request.spec.js",
+          "line": 3,
+          "column": 15,
+          "specs": [
+            {
+              "title": "should send a PUT request",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "location": {
+                        "file": "/Users/rosyagarwal/gitWork/Playwright_TS/tests/api_tests/delete_request.spec.js",
+                        "line": 3,
+                        "column": 15
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-05T17:01:37.143Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "location": {
+                            "file": "/Users/rosyagarwal/gitWork/Playwright_TS/tests/api_tests/delete_request.spec.js",
+                            "line": 3,
+                            "column": 15
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "2353516613ba361c9e6e-ce035eeb65f711678e2d",
+              "file": "api_tests/delete_request.spec.js",
+              "line": 7,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "api_tests/get_request.spec.js",
+      "file": "api_tests/get_request.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "API Tests",
+          "file": "api_tests/get_request.spec.js",
+          "line": 3,
+          "column": 15,
+          "specs": [
+            {
+              "title": "get a  list of posts",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "location": {
+                        "file": "/Users/rosyagarwal/gitWork/Playwright_TS/tests/api_tests/get_request.spec.js",
+                        "line": 3,
+                        "column": 15
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-05T17:01:37.149Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "location": {
+                            "file": "/Users/rosyagarwal/gitWork/Playwright_TS/tests/api_tests/get_request.spec.js",
+                            "line": 3,
+                            "column": 15
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6510abe5fe8ec75b9cc9-475a8c714064eb94d2a5",
+              "file": "api_tests/get_request.spec.js",
+              "line": 6,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "api_tests/post_request.spec.js",
+      "file": "api_tests/post_request.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "API Tests",
+          "file": "api_tests/post_request.spec.js",
+          "line": 3,
+          "column": 15,
+          "specs": [
+            {
+              "title": "should send a POST request",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "location": {
+                        "file": "/Users/rosyagarwal/gitWork/Playwright_TS/tests/api_tests/post_request.spec.js",
+                        "line": 3,
+                        "column": 15
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-05T17:01:37.150Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "location": {
+                            "file": "/Users/rosyagarwal/gitWork/Playwright_TS/tests/api_tests/post_request.spec.js",
+                            "line": 3,
+                            "column": 15
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "31516f863cf0de415a3b-5142c27f20d6f11cfb2a",
+              "file": "api_tests/post_request.spec.js",
+              "line": 7,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "api_tests/put_request.spec.js",
+      "file": "api_tests/put_request.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "API Tests",
+          "file": "api_tests/put_request.spec.js",
+          "line": 3,
+          "column": 15,
+          "specs": [
+            {
+              "title": "should send a PUT request",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "location": {
+                        "file": "/Users/rosyagarwal/gitWork/Playwright_TS/tests/api_tests/put_request.spec.js",
+                        "line": 3,
+                        "column": 15
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-05T17:01:37.156Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "location": {
+                            "file": "/Users/rosyagarwal/gitWork/Playwright_TS/tests/api_tests/put_request.spec.js",
+                            "line": 3,
+                            "column": 15
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "977dafd5a327154f308c-5009fd8777fbee29fddf",
+              "file": "api_tests/put_request.spec.js",
+              "line": 7,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "example.spec.ts",
+      "file": "example.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "has title",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 2327,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-05T17:01:38.272Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a30a6eba6312f6b87ea5-b06063a3e613764d08f8",
+          "file": "example.spec.ts",
+          "line": 3,
+          "column": 5
+        },
+        {
+          "title": "get started link",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 3075,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-05T17:01:38.258Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a30a6eba6312f6b87ea5-274e97907a6e3638a22f",
+          "file": "example.spec.ts",
+          "line": 10,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "seed.spec.ts",
+      "file": "seed.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Test group",
+          "file": "seed.spec.ts",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "seed",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 1035,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-05T17:01:38.256Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "11ceb7af692008938f3b-e93327a24cf4dbee4058",
+              "file": "seed.spec.ts",
+              "line": 4,
+              "column": 7
+            }
+          ]
         }
       ]
     }
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-05-19T17:33:09.953Z",
-    "duration": 2403.990000002086,
-    "expected": 0,
-    "skipped": 1,
-    "unexpected": 1,
+    "startTime": "2026-07-05T17:01:34.691Z",
+    "duration": 7065.937,
+    "expected": 5,
+    "skipped": 4,
+    "unexpected": 0,
     "flaky": 0
   }
 }

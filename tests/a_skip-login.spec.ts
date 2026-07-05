@@ -1,8 +1,6 @@
 
 import { test } from '@playwright/test';
 
-
-
 // const authFile = path.join(__dirname, '../playwright/.auth/user.json');
 
 test('skip authenticate', async ({ page }) => {
