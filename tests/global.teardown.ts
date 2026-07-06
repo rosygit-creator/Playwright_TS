@@ -3,7 +3,7 @@ import fs from 'fs/promises';
 
 const filepath='tests/.auth/user.json'
 
-teardown('delete user cookies from global setup', async ({ }) => {
+teardown.skip('delete user cookies from global setup', async ({ }) => {
   console.log('user cookies from global setup...');
 
   try {

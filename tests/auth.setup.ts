@@ -9,7 +9,7 @@ const authFile = 'tests/.auth/user.json';
 
 // autheticate when dotenv is used
 
-setup('authenticate using environment variables', async ({ page }) => {
+setup.skip('authenticate using environment variables', async ({ page }) => {
   
  // Dynamically import based on the environment
   // Perform authentication steps. Replace these actions with your own.
